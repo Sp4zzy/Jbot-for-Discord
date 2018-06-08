@@ -56,5 +56,5 @@ async def on_message(message):
 ##        await client.send_message(message.channel, "You're not a Supreme Commander...")
 
 
-client.run("NDU0NzMwMTY2ODE2NjA0MTgw.DfyMsw.KTw0c8mrlyWdrFOq2zVYKDkceKI")
+client.run("X X X X X ")
 
