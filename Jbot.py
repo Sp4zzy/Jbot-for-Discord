@@ -18,6 +18,7 @@ def is_pinned(message):
     else:
         return True
 
+
 @client.event
 async def on_message(message):
     if message.content.upper() == "!HELLO":
@@ -34,9 +35,14 @@ async def on_message(message):
                 msg = []
                 async for i in client.logs_from(message.channel, limit = number+1):
                     msg.append(i)
-                await client.purge_from(message.channel, limit = number+1, check = is_pinned)#after = datetime.date(2018,6,1))
+                await client.purge_from(message.channel, limit = number+1, check = is_pinned)
             else:
                 await client.send_message(message.channel, "Oops, you forgot to tell me how many to delete!")
+        else:
+            await client.send_message(message.channel, "You're not a Supreme Commander...")
+    if message.content.upper().startswith('!PURGE'):
+        if "400365260990578691" in [role.id for role in message.author.roles]:
+                await client.purge_from(message.channel, check = is_pinned)
         else:
             await client.send_message(message.channel, "You're not a Supreme Commander...")
 
