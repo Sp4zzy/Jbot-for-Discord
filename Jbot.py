@@ -40,21 +40,5 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "You're not a Supreme Commander...")
 
-
-
-##@client.command(pass_context = True)
-##async def purge(number):
-##    if "400365260990578691" in [role.id for role in message.author.roles]:
-##        number = int(number)
-##        counter = 0
-##        async for i in client.logs_from(message.channel, limit = number):
-##            if counter < number:
-##                await client.delete_message(i)
-##                counter += 1
-##                await asyncio.sleep(1.2)
-##    else:
-##        await client.send_message(message.channel, "You're not a Supreme Commander...")
-
-
 client.run("X X X X X ")
 
