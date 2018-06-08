@@ -34,5 +34,5 @@ async def on_message(message):
             await client.send_message(message.channel, "You're not a Supreme Commander...")
 
 
-client.run("NDU0NzMwMTY2ODE2NjA0MTgw.Dfx1uQ.ZCygg0nIlVsTZ4d7ra_GY81F-Yo")
+client.run("INPUT YOUR OWN SHIT HERE")
 
