@@ -15,15 +15,11 @@ Jbot is a very basic discord bot, meant to be modified and changed to your own n
 
 !remindme [time] [d,h,m,s (time type)] [note] -- Sends a message in the "reminder" channel (Will need to specify in your own code) after a certain time designated by user.  (supports days, hours, minutes, and seconds)
 
-EX: !remindme 5 h Add persistent storage
-
-EX2: !remindme 300 d This reminder is gonna take a while
-
-EX3: !remindme 500 d Why?
-
-EX4: !remindme 5 s peabrain
-
-EX5: !remindme 5 m Get food
+- EX: !remindme 5 h Add persistent storage
+- EX2: !remindme 300 d This reminder is gonna take a while
+- EX3: !remindme 500 d Why?
+- EX4: !remindme 5 s peabrain
+- EX5: !remindme 5 m Get food
 
 !hello -- basic information
 
