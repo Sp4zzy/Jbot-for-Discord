@@ -88,7 +88,9 @@ async def on_message(message):
         await client.send_message(message.channel, ":wave: hi bot")
     if message.content.upper() == "!HELP":
         await client.send_message(message.channel, "Sup, I play music using !yt, and stop using !stop, and will leave the voice channel with !youcango")
+        await client.send_message(message.channel, "!remindme [hours] [note] and i'll give u a reminder after the hours you designated have passed!")
         await client.send_message(message.channel, "I also curse at you in russian when certain commands are entered, and help administrate things.")
+        await client.send_message(message.channel, "A more up to date list may be found here: https://github.com/Sp4zzy/Jbot-for-Discord/blob/master/README.md")
     if message.content.upper() == "!HELLO":
         await client.send_message(message.channel, ":wave: Sup dude. I'm a bot with limited commands.  If you want me to have some functionality, get in touch with Jboi.")
     if message.content.upper().startswith('!PING'):
