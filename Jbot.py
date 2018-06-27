@@ -8,6 +8,15 @@ import time
 import os
 import threading
 
+try:
+    check = open("reminders.txt","r+")
+    print("reminders.txt succesfully found")
+except IOError:
+    f = open("reminders.txt","w+")
+    f.close()
+    print('File "reminders.txt" created')
+    print('Is this your first time running me? Or did I move to a new location without my reminders.txt?')
+
 Client = discord.Client()
 client = commands.Bot(command_prefix = "!")
 
@@ -16,31 +25,69 @@ async def on_ready():
     print("Jbot is ready!")
 
 ### REMINDER FUNCTIONS HERE ###
+def readFile():             
+    d = []
+    with open("reminders.txt") as infile:
+        for i in infile:
+            d.append(eval(i))
+    infile.close()
+    return d
+def addline(string):        
+    f = open('reminders.txt','a')
+    f.write(string+'\n')
+    f.close()
+
+def addReminder(time, value):
+    lines = [line.rstrip('\n') for line in open('reminders.txt','r+')]
+    addline("{'Time': '"+str(time)+"','Reminder': '"+str(value)+"'}")
+    print(lines)
+    return "Reminder added"
+def removeReminder(time, value): 
+    f = open('reminders.txt','r+')
+    d = readFile()
+    f.close()
+    matches = []
+    for i in d:
+        if i['Time'] == time and i['Reminder'] == value:
+            matches.append(i)
+    open('reminders.txt','w').close()  #DELETES EVERYTHING IN THE TEXT FILE
+    f = open('reminders.txt','a+')
+    for i in d:
+        if  i != matches[0]:
+            addReminder(i.get('Time'),i.get('Reminder'))
+    f.close()
+    
 def getDay():
     return datetime.datetime.today()
-
-RemindList = {}
     
-def remindme(time, DorH, value):
-    if DorH == 'h':
+def remindme(time, timeType, note):
+    if timeType == 'h':
         key = getDay() + datetime.timedelta(hours=time)
-        RemindList[str(key)[:16]] = value
-        print(RemindList)
-    if DorH == 'd':
+        addReminder(str(key)[:19], note)
+    if timeType == 'd':
         key = getDay() + datetime.timedelta(days=time)
-        RemindList[str(key)[:16]] = value
-        print(RemindList)
+        addReminder(str(key)[:19], note)
+    if timeType == 'm':
+        key = getDay() + datetime.timedelta(minutes=time)
+        addReminder(str(key)[:19], note)
+    if timeType == 's':
+        key = getDay() + datetime.timedelta(seconds=time)
+        addReminder(str(key)[:19], note)
     
 async def reminder():
     await client.wait_until_ready()
-    await client.send_message(discord.Object(id='461245192180072448'), "I just rebooted, if you made a reminder it may be lost, please remake it.  This will be fixed soon.")
-    #Notifies of reboot, and remaking of reminders.  Will be obsolete once persistent reminder storage is finished next.
     while(1):
-        print("Checking: "+str(getDay())[:16]+" against "+ str(RemindList.keys()))
-        if str(getDay())[:16] in RemindList.keys():
-            await client.send_message(discord.Object(id='461245192180072448'), RemindList[str(getDay())[:16]])
-            del RemindList[str(getDay())[:16]]
-        await asyncio.sleep(5)
+        d = readFile()
+        time = str(getDay())[:19]
+        matches = []
+        for i in d:
+            if i['Time'] == time:
+                matches.append(i)
+        for i in matches:
+            await client.send_message(discord.Object(id='461245192180072448'), str(i['Reminder']))
+            removeReminder(i['Time'], i['Reminder'])
+        print("checking: "+str(time))
+        await asyncio.sleep(1)
 
 client.loop.create_task(reminder())
 ### /REMINDER FUNCTIONS ###
@@ -63,10 +110,9 @@ async def on_message(message):
         t = string.split()[2]
         vT = string.split()[3:]
         v = ' '.join(vT)
-        #await client.send_message(message.channel, "Okay here's what I got: "+str(k)+str(vT)+str(v))
         if str(t) == 'h':
             if int(k) > 24:
-                await client.send_message(message.channel, "We only remind for max of 23 hours during my testing phase. дерьмовый разработчик")
+                await client.send_message(message.channel, "BLYAT, use d for times over 24 hours! дерьмовый разработчик")
             else:
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
@@ -74,14 +120,35 @@ async def on_message(message):
                 await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' hour(s) in the #reminders channel.')
         elif str(t) == 'd':
             if int(k) > 365:
-                await client.send_message(message.channel, "Bruh, I'll prob be dead before I can remind you.")
+                await client.send_message(message.channel, "I'll allow it, but I'll probably be dead by the time I get to reminding you...")
+                userID = message.author.id
+                value = ("<@%s> " % (userID)) + str(v)
+                remindme(int(k), 'd', str(value))
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' day(s) in the #reminders channel.')
             else:
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 'd', str(value))
                 await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' day(s) in the #reminders channel.')
+        elif str(t) == 'm':
+            if int(k) > 59:
+                await client.send_message(message.channel, "BLYAT, use 'h' for hours!")
+            else:
+                userID = message.author.id
+                value = ("<@%s> " % (userID)) + str(v)
+                remindme(int(k), 'm', str(value))
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' minute(s) in the #reminders channel.')
+        elif str(t) == 's':
+            if int(k) > 59:
+                await client.send_message(message.channel, "BLYAT, use 'm' for minutes!")
+            else:
+                userID = message.author.id
+                value = ("<@%s> " % (userID)) + str(v)
+                remindme(int(k), 's', str(value))
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' seconds(s) in the #reminders channel, глупый идиот.')
+
         else:
-            await client.send_message(message.channel, 'Use h, or d to denote the length of reminder.  h up to 23, d up to 31.  "Example: !remindme 3 d Make a better bot."')
+            await client.send_message(message.channel, 'Use h, m, s, or d to denote the length of reminder.  "Example: !remindme 3 d Make a better bot."')
     if message.content.upper().startswith("!TESTREMIND"):
         string = str(message.content)
         k = string.split()[1]
@@ -93,9 +160,9 @@ async def on_message(message):
         await client.send_message(message.channel, ":wave: hi bot")
     if message.content.upper() == "!HELP":
         await client.send_message(message.channel, "Sup, I play music using !yt, and stop using !stop, and will leave the voice channel with !youcango")
-        await client.send_message(message.channel, "!remindme [hours] [note] and i'll give u a reminder after the hours you designated have passed!")
+        await client.send_message(message.channel, "!remindme [time] [timetype] [note] and I'll give you a reminder after the time you designated has passed!")
         await client.send_message(message.channel, "I also curse at you in russian when certain commands are entered, and help administrate things.")
-        await client.send_message(message.channel, "A more up to date list may be found here: https://github.com/Sp4zzy/Jbot-for-Discord/blob/master/README.md")
+        await client.send_message(message.channel, "A more up to date/detailed list may be found here with my source code: https://github.com/Sp4zzy/Jbot-for-Discord/blob/master/README.md")
     if message.content.upper() == "!HELLO":
         await client.send_message(message.channel, ":wave: Sup dude. I'm a bot with limited commands.  If you want me to have some functionality, get in touch with Jboi.")
     if message.content.upper().startswith('!PING'):
