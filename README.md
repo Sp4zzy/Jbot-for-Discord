@@ -1,6 +1,8 @@
 # Jbot-for-Discord
 Jbot with limit functionality
 
+!help -- gives list of all possible commands
+
 !purge -- removes all non-pinned messages in a channel
 
 !clear X -- removes X amount of messages from a channel (prior to command)
