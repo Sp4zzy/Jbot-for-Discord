@@ -30,3 +30,10 @@ EX5: !remindme 5 m Get food
 !ping -- tests that the bot is working
 
 More to come, open to suggestions.
+
+FUTURE TODO:
+
+- Multiple files for easy reading
+- Better channel checking
+- Better admin-rights checks
+- More comments for easier implementation of code to other projects.
