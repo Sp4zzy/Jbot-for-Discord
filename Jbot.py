@@ -256,7 +256,7 @@ async def on_message(message):
         userID = message.author.id
         await client.send_message(message.channel, "<@%s> Pong!" % (userID))
     if message.content.upper().startswith('!CLEAR'):
-        if "400365260990578691" in [role.id for role in message.author.roles]:
+        if message.author.server_permissions.administrator == True:
             if len(str(message.content)) >= 8:
                 m = str(message.content)
                 number = int(m[7:])
@@ -269,7 +269,7 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "You're not a Supreme Commander...")
     if message.content.upper().startswith('!PURGE'):
-        if "400365260990578691" in [role.id for role in message.author.roles]:
+        if message.author.server_permissions.administrator == True:
                 await client.purge_from(message.channel, check = is_pinned)#after = datetime.date(2018,6,1))
         else:
             await client.send_message(message.channel, "You're not a Supreme Commander...")
