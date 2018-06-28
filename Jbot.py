@@ -38,12 +38,13 @@ def addline(string):
     f.write(string+'\n')
     f.close()
 
-def addReminder(time, Vvalue):
+def addReminder(time, Vvalue, chanID):
     lines = [line.rstrip('\n') for line in open('reminders.txt','r+')]
     value = re.sub("'", '', Vvalue)
-    addline("{'Time': '"+str(time)+"','Reminder': '"+str(value)+"'}")
+    addline("{'Time': '"+str(time)+"','Reminder': '"+str(value)+"','Channel': '"+str(chanID)+"'}")
     #print(lines)
     return "Reminder added"
+
 def removeReminder(time, value): 
     f = open('reminders.txt','r+')
     d = readFile()
@@ -56,25 +57,25 @@ def removeReminder(time, value):
     f = open('reminders.txt','a+')
     for i in d:
         if  i != matches[0]:
-            addReminder(i.get('Time'),i.get('Reminder'))
+            addReminder(i.get('Time'),i.get('Reminder'),i.get('Channel'))
     f.close()
     
 def getDay():
     return datetime.datetime.today()
     
-def remindme(time, timeType, note):
+def remindme(time, timeType, note, chanID):
     if timeType == 'h':
         key = getDay() + datetime.timedelta(hours=time)
-        addReminder(str(key)[:19], str(note))
+        addReminder(str(key)[:19], str(note), chanID)
     if timeType == 'd':
         key = getDay() + datetime.timedelta(days=time)
-        addReminder(str(key)[:19], str(note))
+        addReminder(str(key)[:19], str(note), chanID)
     if timeType == 'm':
         key = getDay() + datetime.timedelta(minutes=time)
-        addReminder(str(key)[:19], str(note))
+        addReminder(str(key)[:19], str(note), chanID)
     if timeType == 's':
         key = getDay() + datetime.timedelta(seconds=time)
-        addReminder(str(key)[:19], str(note))
+        addReminder(str(key)[:19], str(note), chanID)
     
 async def reminder():
     await client.wait_until_ready()
@@ -86,7 +87,7 @@ async def reminder():
             if i['Time'] == time:
                 matches.append(i)
         for i in matches:
-            await client.send_message(discord.Object(id='461245192180072448'), str(i['Reminder']))
+            await client.send_message(discord.Object(id=str(i['Channel'])), str(i['Reminder']))
             removeReminder(i['Time'], i['Reminder'])
         #print("checking: "+str(time))
         await asyncio.sleep(1)
@@ -103,61 +104,145 @@ def is_pinned(message):
 
 ### /CLEAR FUNCTIONS ###
 
+def getChanID(channel):
+    chanID = discord.utils.get(client.get_all_channels(), name=str(channel))
+    return chanID.id
     
 @client.event
 async def on_message(message):
+    if message.content.upper().startswith("!CHECKADMIN"):
+        await client.send_message(message.channel, str(message.author.server_permissions.administrator))
     if message.content.upper().startswith("!REMINDME"):
         string = str(message.content)
         k = string.split()[1]
         t = string.split()[2]
         vT = string.split()[3:]
         v = ' '.join(vT)
+        userID = message.author.id
+        chanID = message.channel.id
         if str(t) == 'h':
             if int(k) > 24:
                 await client.send_message(message.channel, "BLYAT, use d for times over 24 hours! дерьмовый разработчик")
             else:
-                userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
-                remindme(int(k), 'h', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' hour(s) in the #reminders channel.')
+                remindme(int(k), 'h', str(value), chanID)
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' hour(s).')
         elif str(t) == 'd':
             if int(k) > 365:
                 await client.send_message(message.channel, "I'll allow it, but I'll probably be dead by the time I get to reminding you...")
-                userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
-                remindme(int(k), 'd', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s) in the #reminders channel.')
+                remindme(int(k), 'd', str(value), chanID)
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s).')
             else:
-                userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
-                remindme(int(k), 'd', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s) in the #reminders channel.')
+                remindme(int(k), 'd', str(value), chanID)
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s).')
         elif str(t) == 'm':
             if int(k) > 59:
                 await client.send_message(message.channel, "BLYAT, use 'h' for hours!")
             else:
-                userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
-                remindme(int(k), 'm', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' minute(s) in the #reminders channel.')
+                remindme(int(k), 'm', str(value), chanID)
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' minute(s).')
         elif str(t) == 's':
             if int(k) > 59:
                 await client.send_message(message.channel, "BLYAT, use 'm' for minutes!")
             else:
-                userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
-                remindme(int(k), 's', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' seconds(s) in the #reminders channel, глупый идиот.')
-
-        else:
-            await client.send_message(message.channel, 'Use h, m, s, or d to denote the length of reminder.  "Example: !remindme 3 d Make a better bot."')
-    if message.content.upper().startswith("!TESTREMIND"):
+                remindme(int(k), 's', str(value), chanID)
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' seconds(s).  глупый идиот.')
+    if message.content.upper().startswith("!REMINDOTHER"):
         string = str(message.content)
         k = string.split()[1]
-        await client.send_message(message.channel, "Next time "+str(k)+" seconds comes around, I'll remind you as a test that I work.")
-        userID = message.author.id
-        value = ("<@%s> " % (userID)) + " I worked!"
-        SECremindme(int(k), str(value))
+        t = string.split()[2]
+        c = string.split()[3]
+        vT = string.split()[4:]
+        v = ' '.join(vT)
+        for i in client.get_all_members():
+            if c.upper() == str(str(i).split('#')[0]).upper():
+                userID = str(i.id)
+                #await client.send_message(message.channel, member_object.mention + ' mention')
+        #userID = "@"+str(NuserID)
+        chanID = message.channel.id
+        if message.author.server_permissions.administrator == True:
+            value = "<@%s> "%userID + str(v)
+            if str(t) == 'h':
+                if int(k) > 24:
+                    await client.send_message(message.channel, "BLYAT, use d for times over 24 hours! дерьмовый разработчик")
+                else:
+                    remindme(int(k), 'h', str(value), chanID)
+                    await client.send_message(message.channel, 'I will do the reminder for "'+str(v)+'" in '+str(k)+' hour(s).')
+            elif str(t) == 'd':
+                if int(k) > 365:
+                    await client.send_message(message.channel, "I'll allow it, but I'll probably be dead by the time I get to reminding you...")
+                    remindme(int(k), 'd', str(value), chanID)
+                    await client.send_message(message.channel, 'I will do the reminder for "'+str(v)+'" in '+str(k)+' day(s).')
+                else:
+                    remindme(int(k), 'd', str(value), chanID)
+                    await client.send_message(message.channel, 'I will do the reminder for "'+str(v)+'" in '+str(k)+' day(s).')
+            elif str(t) == 'm':
+                if int(k) > 59:
+                    await client.send_message(message.channel, "BLYAT, use 'h' for hours!")
+                else:
+                    remindme(int(k), 'm', str(value), chanID)
+                    await client.send_message(message.channel, 'I will do the reminder for "'+str(v)+'" in '+str(k)+' minute(s).')
+            elif str(t) == 's':
+                if int(k) > 59:
+                    await client.send_message(message.channel, "BLYAT, use 'm' for minutes!")
+                else:
+                    remindme(int(k), 's', str(value), chanID)
+                    await client.send_message(message.channel, 'I will do the reminder for "'+str(v)+'" in '+str(k)+' seconds(s).  глупый идиот.')
+            else:
+                await client.send_message(message.channel, 'Use h, m, s, or d to denote the length of reminder.  "Example: !remindme 3 d Make a better bot."')
+        else:
+            await client.send_message(message.channel, "Sorry, only server administrators can use this command!")
+
+    if message.content.upper().startswith("!ANNOUNCE"):
+        string = str(message.content)
+        k = string.split()[1]
+        t = string.split()[2]
+        c = string.split()[3]
+        vT = string.split()[4:]
+        v = ' '.join(vT)
+        userID = '@everyone'
+        chanID = discord.utils.get(client.get_all_channels(), name=str(c))
+        if message.author.server_permissions.administrator == True:
+            if str(t) == 'h':
+                if int(k) > 24:
+                    await client.send_message(message.channel, "BLYAT, use d for times over 24 hours! дерьмовый разработчик")
+                else:
+                    value = ("%s " % (userID)) + str(v)
+                    remindme(int(k), 'h', str(value), chanID.id)
+                    await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' hour(s).')
+            elif str(t) == 'd':
+                if int(k) > 365:
+                    await client.send_message(message.channel, "I'll allow it, but I'll probably be dead by the time I get to reminding you...")
+                    value = ("%s " % (userID)) + str(v)
+                    remindme(int(k), 'd', str(value), chanID.id)
+                    await client.send_message(message.channel, 'I\'ll announce the message: "'+str(v)+'" in '+str(k)+' day(s).')
+                else:
+                    value = ("%s " % (userID)) + str(v)
+                    remindme(int(k), 'd', str(value), chanID.id)
+                    await client.send_message(message.channel, 'I\'ll announce the message: "'+str(v)+'" in '+str(k)+' day(s).')
+            elif str(t) == 'm':
+                if int(k) > 59:
+                    await client.send_message(message.channel, "BLYAT, use 'h' for hours!")
+                else:
+                    value = ("%s " % (userID)) + str(v)
+                    remindme(int(k), 'm', str(value), chanID.id)
+                    await client.send_message(message.channel, 'I\'ll announce the message: "'+str(v)+'" in '+str(k)+' minute(s).')
+            elif str(t) == 's':
+                if int(k) > 59:
+                    await client.send_message(message.channel, "BLYAT, use 'm' for minutes!")
+                else:
+                    value = ("%s " % (userID)) + str(v)
+                    remindme(int(k), 's', str(value), chanID.id)
+                    await client.send_message(message.channel, 'I\'ll announce the message: "'+str(v)+'" in '+str(k)+' seconds(s).  глупый идиот.')
+            else:
+                await client.send_message(message.channel, 'Use h, m, s, or d to denote the length of reminder.  "Example: !remindme 3 d Make a better bot."')
+        else:
+            await client.send_message(message.channel, "Sorry, only server administrators can use this command!")
+
     if message.content.upper() == "HI BOT":
         await client.send_message(message.channel, ":wave: hi bot")
     if message.content.upper() == "!HELP":
@@ -171,7 +256,6 @@ async def on_message(message):
         userID = message.author.id
         await client.send_message(message.channel, "<@%s> Pong!" % (userID))
     if message.content.upper().startswith('!CLEAR'):
-        #if message.author.id == "93141711059968000":
         if "400365260990578691" in [role.id for role in message.author.roles]:
             if len(str(message.content)) >= 8:
                 m = str(message.content)
@@ -185,7 +269,6 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "You're not a Supreme Commander...")
     if message.content.upper().startswith('!PURGE'):
-        #if message.author.id == "93141711059968000":
         if "400365260990578691" in [role.id for role in message.author.roles]:
                 await client.purge_from(message.channel, check = is_pinned)#after = datetime.date(2018,6,1))
         else:
@@ -223,5 +306,5 @@ async def on_message(message):
         await client.send_message(message.channel, "<:scav2:400367971115073537> трахать тебя мудак!")
 
 
-client.run("C H A N G E")
+client.run("C H A NGE")
 
