@@ -21,6 +21,14 @@ Jbot is a very basic discord bot, meant to be modified and changed to your own n
 - EX4: !remindme 5 s peabrain
 - EX5: !remindme 5 m Get food
 
+!remindother -- !remindother [time] [dhms] [othername] [note]
+
+- EX: !remindother 5 d sp4zzy Add more bot commands!
+
+!announce -- !announce [time] [dhms] [note]
+
+- EX: !announce 1 h Server restarting now!
+
 !hello -- basic information
 
 !ping -- tests that the bot is working
@@ -30,6 +38,6 @@ More to come, open to suggestions.
 FUTURE TODO:
 
 - Multiple files for easy reading
-- Better channel checking
-- Better admin-rights checks
 - More comments for easier implementation of code to other projects.
+- Error handling on !yt and other commands
+- Check if message is from bot itself to prevent shit like this https://i.imgur.com/R9v4Hyg.png
