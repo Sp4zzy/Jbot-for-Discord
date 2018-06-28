@@ -7,6 +7,7 @@ import asyncio
 import time
 import os
 import threading
+import re
 
 try:
     check = open("reminders.txt","r+")
@@ -37,10 +38,11 @@ def addline(string):
     f.write(string+'\n')
     f.close()
 
-def addReminder(time, value):
+def addReminder(time, Vvalue):
     lines = [line.rstrip('\n') for line in open('reminders.txt','r+')]
+    value = re.sub("'", '', Vvalue)
     addline("{'Time': '"+str(time)+"','Reminder': '"+str(value)+"'}")
-    print(lines)
+    #print(lines)
     return "Reminder added"
 def removeReminder(time, value): 
     f = open('reminders.txt','r+')
@@ -63,16 +65,16 @@ def getDay():
 def remindme(time, timeType, note):
     if timeType == 'h':
         key = getDay() + datetime.timedelta(hours=time)
-        addReminder(str(key)[:19], note)
+        addReminder(str(key)[:19], str(note))
     if timeType == 'd':
         key = getDay() + datetime.timedelta(days=time)
-        addReminder(str(key)[:19], note)
+        addReminder(str(key)[:19], str(note))
     if timeType == 'm':
         key = getDay() + datetime.timedelta(minutes=time)
-        addReminder(str(key)[:19], note)
+        addReminder(str(key)[:19], str(note))
     if timeType == 's':
         key = getDay() + datetime.timedelta(seconds=time)
-        addReminder(str(key)[:19], note)
+        addReminder(str(key)[:19], str(note))
     
 async def reminder():
     await client.wait_until_ready()
@@ -86,7 +88,7 @@ async def reminder():
         for i in matches:
             await client.send_message(discord.Object(id='461245192180072448'), str(i['Reminder']))
             removeReminder(i['Time'], i['Reminder'])
-        print("checking: "+str(time))
+        #print("checking: "+str(time))
         await asyncio.sleep(1)
 
 client.loop.create_task(reminder())
@@ -117,19 +119,19 @@ async def on_message(message):
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 'h', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' hour(s) in the #reminders channel.')
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' hour(s) in the #reminders channel.')
         elif str(t) == 'd':
             if int(k) > 365:
                 await client.send_message(message.channel, "I'll allow it, but I'll probably be dead by the time I get to reminding you...")
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 'd', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' day(s) in the #reminders channel.')
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s) in the #reminders channel.')
             else:
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 'd', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' day(s) in the #reminders channel.')
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' day(s) in the #reminders channel.')
         elif str(t) == 'm':
             if int(k) > 59:
                 await client.send_message(message.channel, "BLYAT, use 'h' for hours!")
@@ -137,7 +139,7 @@ async def on_message(message):
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 'm', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' minute(s) in the #reminders channel.')
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' minute(s) in the #reminders channel.')
         elif str(t) == 's':
             if int(k) > 59:
                 await client.send_message(message.channel, "BLYAT, use 'm' for minutes!")
@@ -145,7 +147,7 @@ async def on_message(message):
                 userID = message.author.id
                 value = ("<@%s> " % (userID)) + str(v)
                 remindme(int(k), 's', str(value))
-                await client.send_message(message.channel, 'You will be reminded of message: "'+str(value)+'" in '+str(k)+' seconds(s) in the #reminders channel, глупый идиот.')
+                await client.send_message(message.channel, 'You will be reminded of message: "'+str(v)+'" in '+str(k)+' seconds(s) in the #reminders channel, глупый идиот.')
 
         else:
             await client.send_message(message.channel, 'Use h, m, s, or d to denote the length of reminder.  "Example: !remindme 3 d Make a better bot."')
