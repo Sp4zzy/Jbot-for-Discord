@@ -25,7 +25,7 @@ Jbot is a very basic discord bot, meant to be modified and changed to your own n
 
 - EX: !remindother 5 d sp4zzy Add more bot commands!
 
-!announce -- !announce [time] [dhms] [note]
+!announce -- !announce [time] [dhms] [channel] [note]
 
 - EX: !announce 1 h Server restarting now!
 
