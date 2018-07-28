@@ -13,7 +13,7 @@ The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This 
 
 !yt [link] -- plays a youtube link
 
-!stop -- stops youtube link playback & makes bot leave channel -- Having this & !youcango caused bot to hang around in voice channel after playback was stopped, and made it impossible to start a new video playback.
+!stop -- stops youtube link playback & makes bot leave channel -- Having this & !youcango caused bot to hang around in voice channel after playback was stopped, and made it impossible to start a new playback.
 
 ~~!youcango -- makes bot leave playback voice channel~~
 
@@ -29,17 +29,17 @@ The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This 
 - EX4: !remindme 5 s peabrain
 - EX5: !remindme 5 m Get food
 
-!remindother -- !remindother [time] [dhms] [othername] [note]
+!remindother -- !remindother [time] [dhms] [othername] [note] -- (Admin command)
 
 - EX: !remindother 5 d sp4zzy Add more bot commands!
 
-!announce -- !announce [time] [dhms] [channel] [note]
+!announce -- !announce [time] [dhms] [channel] [note] -- (Admin command)
 
-- EX: !announce 1 h Server restarting now!
+- EX: !announce 1 h announcements Server restarting now!
 
 !hello -- basic information
 
-!ping -- tests that the bot is working
+~~!ping -- tests that the bot is working~~ -- No longer needed, use !hello to check if bot works
 
 Some other kinda-secret admin ones that I haven't updated this page with, (assuming you're just adding him to your server, ask me about them so you can potentially mess with your discord patrons)
 
