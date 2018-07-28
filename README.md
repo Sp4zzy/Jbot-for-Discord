@@ -21,9 +21,9 @@ The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This 
 
 !clear X -- removes X amount of messages from a channel (Admin command)
 
-!remindme [time] [d,h,m,s (time type)] [note] -- Sends a message in the "reminder" channel (Will need to specify in your own code) after a certain time designated by user.  (supports days, hours, minutes, and seconds)
+!remindme [time] [d,h,m,s (time type)] [note] -- Sends a message in the "reminder" channel (Will need to specify in your own code) after a certain time designated by user.  (supports days, hours, minutes, and seconds, this is PERSISTENT NOW)
 
-- EX: !remindme 5 h Add persistent storage
+- EX: !remindme 5 h Code something useful!
 - EX2: !remindme 300 d This reminder is gonna take a while
 - EX3: !remindme 500 d Why?
 - EX4: !remindme 5 s peabrain
@@ -52,3 +52,17 @@ FUTURE TODO:
 - Multiple files for easy reading
 - More comments for easier implementation of code to other projects.
 - Check if message is from bot itself to prevent shit like this https://i.imgur.com/R9v4Hyg.png
+
+# Legal Disclaimer Surrounding GDPR
+
+By using this bot on your server, you should be made aware that I am logging when commands are done through the bot.  The exact log is as follows: 
+
+[HH:MM:SS] COMMAND TYPE issued by USER ---- FULL COMMAND TYPED (including invalid syntax) ==== SERVER NAME
+
+So for example, this command: "!yt https://www.youtube.com/watch?v=iywaBOMvYLI"
+
+Is logged as such: "[15:33:28] !yt command issued by AmericanLegend#6969 ---- !yt https://www.youtube.com/watch?v=iywaBOMvYLI ==== Jbot Support"
+
+This information is purely for diagnostic use to debug errors that occur during run-time.  So if a user says "Hey, I used the !remindme command and it never reminded me!" I can get specific information, check the logs, and see what went wrong.
+
+I do not distribute, sell, or use this information for anything else.  If you have any issues with this, don't use the bot.
