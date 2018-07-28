@@ -13,9 +13,9 @@ The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This 
 
 !yt [link] -- plays a youtube link
 
-!stop -- stops youtube link playback
+!stop -- stops youtube link playback & makes bot leave channel -- Having this & !youcango caused bot to hang around in voice channel after playback was stopped, and made it impossible to start a new video playback.
 
-!youcango -- makes bot leave playback voice channel
+~~!youcango -- makes bot leave playback voice channel~~
 
 !purge -- removes all non-pinned messages in a channel (Admin command)
 
@@ -49,5 +49,4 @@ FUTURE TODO:
 
 - Multiple files for easy reading
 - More comments for easier implementation of code to other projects.
-- Error handling on !yt and other commands
 - Check if message is from bot itself to prevent shit like this https://i.imgur.com/R9v4Hyg.png
