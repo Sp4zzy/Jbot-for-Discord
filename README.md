@@ -1,6 +1,14 @@
 # Jbot-for-Discord
 Jbot is a very basic discord bot, meant to be modified and changed to your own needs.  You will need your own server / computer to run the bot.  If you need help modifying let me know, and I will help as much as I can.  Seriously, just leave me a comment or get in touch with me somehow.  I love coding and am always looking for new projects.
 
+# Adding Jbot to your discord
+
+Jbot can be added by going to this link: https://discordbots.org/bot/454730166816604180
+
+The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This will allow you to get in touch with me for assistance, feature requests, and anything else you might need related to this project.
+
+# Jbot's current commands
+
 !help -- gives list of all possible commands
 
 !yt [link] -- plays a youtube link
@@ -32,6 +40,8 @@ Jbot is a very basic discord bot, meant to be modified and changed to your own n
 !hello -- basic information
 
 !ping -- tests that the bot is working
+
+Some other kinda-secret admin ones that I haven't updated this page with, (assuming you're just adding him to your server, ask me about them so you can potentially mess with your discord patrons)
 
 More to come, open to suggestions.
 
