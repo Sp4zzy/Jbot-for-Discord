@@ -45,6 +45,8 @@ The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This 
 
 !alexjones -- Jbot will join your voice channel and play a random Alex Jones rant / freakout, because who doesn't love an Alex Jones rant?
 
+!roll [sides] -- Jbot  rolls a dice for you! Try to get a nat 20!
+
 Some other kinda-secret admin ones that I haven't updated this page with, (assuming you're just adding him to your server, ask me about them so you can potentially mess with your discord patrons)
 
 More to come, open to suggestions.
