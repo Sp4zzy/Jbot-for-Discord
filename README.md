@@ -7,6 +7,9 @@ Jbot can be added by going to this link: https://discordbots.org/bot/45473016681
 
 The Jbot support discord can be joined here: https://discord.gg/BgWqV6F -- This will allow you to get in touch with me for assistance, feature requests, and anything else you might need related to this project.
 
+This bot requires you to give it a group to work.  If you want to use the admin commands, make sure it has administrative privilege.
+I don't have it auto-generating a group because 1. I just haven't done it yet, and 2. some people might not want the bot to have admin access, so you can limit it's ability to function based on the group you give it.
+
 # Jbot's current commands
 
 !help -- gives list of all possible commands
