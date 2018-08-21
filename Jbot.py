@@ -243,7 +243,9 @@ async def on_message(message):
             vT = string.split()[4:]
             v = ' '.join(vT)
             userID = '@everyone'
-            chanID = discord.utils.get(client.get_all_channels(), name=str(c))
+            chanID = discord.utils.get(client.get_all_channels(),
+                                       server__name=str(message.server),
+                                       name=str(c))
             if message.author.server_permissions.administrator == True:
                 if str(t) == 'h':
                     if int(k) > 24:
