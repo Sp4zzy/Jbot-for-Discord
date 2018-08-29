@@ -24,7 +24,7 @@ Permissions for Jbot himself are listed as (Jbot needs .... )
 
 !purge -- removes all non-pinned messages in a channel (Admin command) / (Jbot needs message deleting permissions)
 
-!clear X -- removes X amount of messages from a channel (Admin command) / (Jbot needs message deleting permissions)
+!clear [number] -- removes that number of messages from a channel (Admin command) / (Jbot needs message deleting permissions)
 
 !remindme [time] [d,h,m,s (time type)] [note] -- Sends a message in the "reminder" channel (Will need to specify in your own code) after a certain time designated by user.  (supports days, hours, minutes, and seconds, this is PERSISTENT NOW) (Jbot needs message permissions and @)
 
