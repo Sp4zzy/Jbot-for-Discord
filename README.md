@@ -18,6 +18,8 @@ Permissions for Jbot himself are listed as (Jbot needs .... )
 
 !yt [link] -- plays a youtube link (Jbot needs voice channel join power)
 
+!active & !inactve -- if you have a tag for "active" users on your server, you can have jbot assign and unassign that tag.  This is useful for gaming servers, where you might want to be pingable by other people, or maybe not pingable.  In the future, I will make it possible to assign your own custom server-role for this.
+
 !stop -- stops youtube link playback & makes bot leave channel -- Having this & !youcango caused bot to hang around in voice channel after playback was stopped, and made it impossible to start a new playback. 
 
 ~~!youcango -- makes bot leave playback voice channel~~
