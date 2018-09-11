@@ -54,6 +54,10 @@ Permissions for Jbot himself are listed as (Jbot needs .... )
 
 !roll [sides] -- Jbot  rolls a dice for you! Try to get a nat 20! (Jbot needs message permissions)
 
+!toto -- Be in a voice channel :)
+
+Like alexa, Jbot can also "play despacito" if you want it to.
+
 More to come, open to suggestions.
 
 FUTURE TODO:
