@@ -1,6 +1,10 @@
 # Jbot-for-Discord
 Jbot is a very basic discord bot, meant to be modified and changed to your own needs.  You will need your own server / computer to run the bot.  If you need help modifying let me know, and I will help as much as I can.  Seriously, just leave me a comment or get in touch with me somehow.  I love coding and am always looking for new projects.
 
+# Coming soon
+
+* Magic 8 Ball cmd
+
 # Adding Jbot to your discord
 
 Jbot can be added by going to this link: https://discordbots.org/bot/454730166816604180
