@@ -1,10 +1,6 @@
 # Jbot-for-Discord
 Jbot is a very basic discord bot, meant to be modified and changed to your own needs.  You will need your own server / computer to run the bot.  If you need help modifying let me know, and I will help as much as I can.  Seriously, just leave me a comment or get in touch with me somehow.  I love coding and am always looking for new projects.
 
-# Coming soon
-
-* Magic 8 Ball cmd
-
 # Adding Jbot to your discord
 
 Jbot can be added by going to this link: https://discordbots.org/bot/454730166816604180
@@ -19,6 +15,12 @@ Permissions for Jbot himself are listed as (Jbot needs .... )
 # Jbot's current commands
 
 !help -- gives list of all possible commands (Jbot needs message permissions)
+
+!8ball [question] -- gives you an answer to a yes or no question
+
+!bsgtime [number] [day/hour/min/whatever] [OPTIONAL: item they're promising in that timeframe] -- joke command
+
+!valvetime [number] [day/hour/min/whatever] [OPTIONAL: item they're promising in that timeframe] -- joke command
 
 !yt [link] -- plays a youtube link (Jbot needs voice channel join power)
 
