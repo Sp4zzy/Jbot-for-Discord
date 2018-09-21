@@ -1,6 +1,8 @@
 # Jbot-for-Discord
 Jbot is a very basic discord bot for managing your server.  He doesn't require hosting, and has a slew of random commands, with more being added by request.  See below for his capabilities.
 
+To make a request, just join the support discord and get in touch with me!
+
 # Adding Jbot to your discord
 
 Jbot can be added by going to this link: https://discordbots.org/bot/454730166816604180
