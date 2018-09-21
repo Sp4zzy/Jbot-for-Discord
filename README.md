@@ -3,6 +3,8 @@ Jbot is a very basic discord bot for managing your server.  He doesn't require h
 
 To make a request, just join the support discord and get in touch with me!
 
+TBD: !featurerequest command
+
 # Adding Jbot to your discord
 
 Jbot can be added by going to this link: https://discordbots.org/bot/454730166816604180
