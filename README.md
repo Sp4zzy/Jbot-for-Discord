@@ -79,7 +79,7 @@ FUTURE TODO:
 
 By using this bot on your server, you should be made aware that the bot has access to see EVERY message you send in ANY channel that it has access to.  All discord.py bots have this capability, and I am constantly updating my logging techniques to better handle bugs that occur.  If you are uncomfortable with that, you have the option of not using this bot.
 
-**I do not distribute, sell, or use this information for anything other than debugging.**
+**I do not distribute, sell, or use this information for anything other than debugging and reporting abuse to Discord.**
 
 Again, If you have any issues with this, don't use the bot, or contact me if you need clarification on what I'm logging.
 
