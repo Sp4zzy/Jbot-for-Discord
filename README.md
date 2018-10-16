@@ -84,3 +84,4 @@ Again, If you have any issues with this, don't use the bot, or contact me if you
 # Safety Information When Using Bots
 
 I stumbled upon a bot breach on reddit, where the bot in question went and deleted a bunch of server channels.  This breach occurred because the bot's token was publicly listed on it's github.  If you notice in Jbot's source code I **DO NOT** reveal the token.  I keep the token secure, and if I notice or even **suspect** it may have leaked, I change it.  I note next to all the commands what specific permissions Jbot needs to perform each.  Do not give him more than he needs!
+
