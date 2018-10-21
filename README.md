@@ -52,6 +52,11 @@ Permissions for Jbot himself are listed as (Jbot needs .... )
 
 - EX: !announce 1 h announcements Server restarting now!
 
+!removeannouncement & !removereminder - All reminders & announcements are given a unique ID, you can use this ID to cancel the reminder / announcement
+
+- EX: !removereminder 100A
+- EX: !removeannouncement 101A
+
 !hello -- basic information (Jbot needs message permissions)
 
 ~~!ping -- tests that the bot is working~~ -- No longer needed, use !hello to check if bot works
