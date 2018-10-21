@@ -1,6 +1,6 @@
 ## 10/21/18
 
-[s]Remove reminder / announcement was requested and will be worked on this week.  I have some rudimentary ways to remove reminders, but I think that I'll need to rework how I'm storing reminders to be more efficient.  It's currently really hacked together, and since I've learned about the shelve library for Python I think it'd be best to move it over to that.  I hope to get the reminders over to that system by 10/27.  Of course, with the holidays and work this might be a bit of a stretch as I've been burnt out on developing.[/s]
+~~Remove reminder / announcement was requested and will be worked on this week.  I have some rudimentary ways to remove reminders, but I think that I'll need to rework how I'm storing reminders to be more efficient.  It's currently really hacked together, and since I've learned about the shelve library for Python I think it'd be best to move it over to that.  I hope to get the reminders over to that system by 10/27.  Of course, with the holidays and work this might be a bit of a stretch as I've been burnt out on developing.~~
 
 EDIT: haha just kidding I finished it now
 
