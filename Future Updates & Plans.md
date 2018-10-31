@@ -1,3 +1,7 @@
+## 10/31/18
+
+Everything from 10/15 still needs to be added.. I also have a request now for !mute @user 15 m/h/s and I think that'll be a good addition.  The reminder loop can be modified to also check if someone's mute is up, and then unmute them.  I'll add that functionality tonight (assuming trick or treaters don't swarm my house and kill me for my candy).
+
 ## 10/21/18
 
 ~~Remove reminder / announcement was requested and will be worked on this week.  I have some rudimentary ways to remove reminders, but I think that I'll need to rework how I'm storing reminders to be more efficient.  It's currently really hacked together, and since I've learned about the shelve library for Python I think it'd be best to move it over to that.  I hope to get the reminders over to that system by 10/27.  Of course, with the holidays and work this might be a bit of a stretch as I've been burnt out on developing.~~
