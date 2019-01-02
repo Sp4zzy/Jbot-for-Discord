@@ -1,3 +1,7 @@
+# CURRENT STATUS
+
+- Jbot is currently being updated to 1.0.0a, some commands / features are not working, specifically playing youtube videos, meaning the following commands have been modified - !alexjones, !toto, play despacito, and !yt are all currently gone or missing certain functionality.  A fix will be released when I get a chance, but don't hold your breath.  If you have an issue with this, make a !featurerequest or !bugreport.
+
 # Jbot-for-Discord
 Jbot is a very basic discord bot for managing your server.  He doesn't require hosting, and has a slew of random commands, with more being added by request.  See below for his capabilities.
 
